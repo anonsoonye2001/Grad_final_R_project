@@ -155,7 +155,7 @@ cast<-dcast(data=melt,formula=BottleName~variable,
              fun.aggregate=mean)
 cast
 
-#ddply (10 pts)
+#ddply  and if else statement (10 pts)
 unique(a$BottleName)
 
 d=a[a$BottleName=="IBYC",]
@@ -215,9 +215,24 @@ hist
 
 
 ##Point, bar, or line plot (whichever makes the most sense) (5 points)
+
+# Spectral colour map from ColorBrewer
+spectral <- function(n=6) {
+  library("RColorBrewer")
+  rev(brewer.pal(name="Spectral", n=n))
+}
+
+dir.create("a.plot")
+
+
+
 point<-ggplot(data = a, aes(x = Salinity, y=BottleName)) +
   geom_point(color="orange")
 point
+ggsave(filename = paste0(point,'.png'),
+       plot = u.plot, width = 4, height = 3, units = 'in',
+       dpi = 300)
+
 
 bargraph<-ggplot(data = a, aes(x=Salinity)) +
   geom_bar(color="Orange")+
@@ -228,6 +243,13 @@ bargraph
 #and adjusting the theme of the plot (10 points)
 ggplot(data=a, aes(x=Salinity,y=BottleName)) +
   geom_point(color="blue") +geom_tile()
+  
+
+
+ggplot(data=a, aes(x=Salinity,y=BottleName)) +
+  geom_point(color="blue") +geom_tile()+
+  theme_bw()
+
 
 
 #A map of showing the geographic location where the data was collected (10 points)
@@ -250,3 +272,4 @@ dir.create("C:/Users/anons/OneDrive/Desktop/R programming/Grad_final_R_project")
 
 #Exporting and saving figures from ggplot (2 points)
 ggsave(".tiff")
+
